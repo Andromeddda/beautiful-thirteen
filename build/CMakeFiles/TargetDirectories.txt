@@ -1,0 +1,3 @@
+/home/andrew/study/job/dobyte/build/CMakeFiles/goodnum13.dir
+/home/andrew/study/job/dobyte/build/CMakeFiles/edit_cache.dir
+/home/andrew/study/job/dobyte/build/CMakeFiles/rebuild_cache.dir
