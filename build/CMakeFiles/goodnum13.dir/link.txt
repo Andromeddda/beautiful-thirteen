@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -Wall -Werror -Wextra -pedantic -Wl,--dependency-file=CMakeFiles/goodnum13.dir/link.d CMakeFiles/goodnum13.dir/src/main.cpp.o -o goodnum13
