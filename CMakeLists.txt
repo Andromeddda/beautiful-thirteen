@@ -4,7 +4,7 @@ project(beautiful-thirteen CXX)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS "-O3 -Wall -Werror -Wextra -pedantic")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -g0 -Wall -Werror -Wextra -pedantic")
 
 set(SOURCE_FILES  src/main.cpp)
 

@@ -54,3 +54,16 @@ cmake --build build -j4
 ```bash
 ./build/beautiful-thirteen
 ```
+
+## Бенчмарк
+
+| Metric | Value |
+|-|-|
+| Compiler | `c++ (GCC) 15.2.1 20250813` |
+| Release flags | `-O3 -DNDEBUG` |
+| Build time | 1120 ms  |
+| Avg execution time | 2024 us (averaged over 100 runs) |
+| Binary size | 15.6 KiB  |
+| **Answer** | **9203637295151** |
+
+> Measured on `Linux 6.18.8-arch2-1 x86_64`, 8 cores, 2026-02-15 13:26 UTC.
