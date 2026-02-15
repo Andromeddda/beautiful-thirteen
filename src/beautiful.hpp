@@ -27,7 +27,7 @@
 //
 
 // N(S) is computed via inclusion-exclusion over the constraint 
-// 0 < x < 12 for each of the 6 digits: 
+// 0 < x < 13 for each of the 6 digits: 
 
 // N(S) = [solutions with no constraints] - SUM |Ai| + SUM |Ai AND Aj| - ... +  SUM |A1 AND A2 AND ... AND A6|
 // Where Ai is the set of solutions where the i-th digit is >= 13 
@@ -53,13 +53,13 @@ namespace beautiful_numbers {
     constexpr int kMaxSum   = (kBase - 1) * kDigits; // 72
 
     // C(n, 5) for small non-negative n
-    [[nodiscard]] constexpr int64_t binom_n_5(int n) noexcept
+    [[nodiscard]] constexpr int64_t binomial_n_5(int n_) noexcept
     {
-        if (n < 5) [[unlikely]] {
+        if (n_ < 5) [[unlikely]] {
             return 0;
         }
 
-        const auto m = static_cast<int64_t>(n);
+        const auto m = static_cast<int64_t>(n_);
         return (m * (m - 1) * (m - 2) * (m - 3) * (m - 4)) / 120;
     }
 
@@ -67,14 +67,14 @@ namespace beautiful_numbers {
     constexpr std::array<int64_t, kDigits + 1> kBinom6 = {1, 6, 15, 20, 15, 6, 1};
 
     // N(S) computed via inclusion-exclusion
-    [[nodiscard]] constexpr int64_t ways_for_sum(int sum) noexcept
+    [[nodiscard]] constexpr int64_t ways_for_sum(int sum_) noexcept
     {
         int64_t result = 0;
         int     sign   = 1;
 
         for (int k = 0; k <= kDigits; ++k) {
 
-            const int arg = sum - kBase * k + 5; // S - k*13 + 5
+            const int arg = sum_ - kBase * k + 5; // S - k*13 + 5
 
             // if arg < 5, all next terms will be zero as well 
             if (arg < 5) [[unlikely]] {
@@ -82,7 +82,7 @@ namespace beautiful_numbers {
             }
 
             // (-1)^k * C(6, k) * C(S - k*13 + 5, 5)
-            result += sign * kBinom6[k] * binom_n_5(arg);
+            result += sign * kBinom6[k] * binomial_n_5(arg);
 
             // inclusion-exclusion alternates signs
             sign = -sign; 
@@ -92,7 +92,7 @@ namespace beautiful_numbers {
     }
 
     // Compile-time lookup table: N(S) for S in [0, kMaxSum]
-    [[nodiscard]] consteval std::array<int64_t, kMaxSum + 1> build_ways_table() noexcept
+    [[nodiscard]] consteval std::array<int64_t, kMaxSum + 1> build_ways_lookup_table() noexcept
     {
         std::array<int64_t, kMaxSum + 1> table{};
     
@@ -102,7 +102,7 @@ namespace beautiful_numbers {
         return table;
     }
 
-    constexpr std::array<int64_t, kMaxSum + 1> kWays = build_ways_table();
+    constexpr std::array<int64_t, kMaxSum + 1> kWays = build_ways_lookup_table();
 
     [[nodiscard]] int64_t count_beautiful_numbers() noexcept
     {
